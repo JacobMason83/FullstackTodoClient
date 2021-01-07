@@ -48,7 +48,7 @@ class App extends Component {
   }
   deleteToDo = id => {
     axios 
-    .delete(`https://jdm-todo-api.herokuapp.com/todo/${this.state.todo.id}`)
+    .delete(`https://jdm-todo-api.herokuapp.com/todo/${id}`)
     .then(() => this.setState({
       todos: this.state.todos.filter(todo => {
         return todo.id !== id
