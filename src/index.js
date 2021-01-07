@@ -30,12 +30,25 @@ class App extends Component {
   }
   handleSubmit = e => {
     e.preventDefault()
-    console.log('submitted')
+    //post to api
+    axios
+      .post('http://jdm-todo-api.herokuapp.com/todo', {
+        title: this.state.todo,
+        done: false
+      })
+      .then(res => {
+        this.setState({
+          todos: [...this.state.todos, res.data],
+          todo: ""
+        })
+      })
+      .catch(err => console.error("handleSubmit Error", err))
+    //set state with new item
   }
   renderTodos = () => {
     return this.state.todos.map(todo => {
       return(
-        <div>
+        <div key={todo.id} className="todo-item">
           <h1>{todo.title}</h1>
         </div>
       )
@@ -44,7 +57,7 @@ class App extends Component {
   
   render(){
   return(
-    <div id='root'>
+    <div id='app'>
       <h1>ToDo List</h1>
       <form className='add-todo' onSubmit={this.handleSubmit}>
         <input type="text"
