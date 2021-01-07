@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 import './styles.css'
@@ -18,7 +18,7 @@ class App extends Component {
   }
   componentDidMount() {
     axios
-    .get('http://jdm-todo-api.herokuapp.com/todos')
+    .get('https://jdm-todo-api.herokuapp.com/todos')
     .then(res => this.setState({
       todos: res.data
     }))  
@@ -33,7 +33,7 @@ class App extends Component {
     e.preventDefault()
     //post to api
     axios
-      .post('http://jdm-todo-api.herokuapp.com/todo', {
+      .post('https://jdm-todo-api.herokuapp.com/todo', {
         title: this.state.todo,
         done: false
       })
@@ -46,10 +46,20 @@ class App extends Component {
       .catch(err => console.error("handleSubmit Error", err))
     //set state with new item
   }
+  deleteToDo = id => {
+    axios 
+    .delete(`https://jdm-todo-api.herokuapp.com/todo/${this.state.todo.id}`)
+    .then(() => this.setState({
+      todos: this.state.todos.filter(todo => {
+        return todo.id !== id
+      })
+    }))
+    .catch(err => console.error("deleteTodo Error: ", err))
+  }
   renderTodos = () => {
     return this.state.todos.map(todo => {
       return(
-        <TodoItem key={todo.id} {...todo} />
+        <TodoItem key={todo.id} {...todo} deleteToDo={this.deleteToDo} />
       )
     })
   }

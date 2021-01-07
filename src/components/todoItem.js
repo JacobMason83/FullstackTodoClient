@@ -5,7 +5,7 @@ export default function TodoItem(props) {
     const [done, setDone] = useState(props.done)
     const toggleDone = () => {
         axios
-        .patch(`http://jdm-todo-api.herokuapp.com/todo/${props.id}`,{
+        .patch(`https://jdm-todo-api.herokuapp.com/todo/${props.id}`,{
             done:!done
         })
         .then(() => setDone(!done))
@@ -17,8 +17,8 @@ export default function TodoItem(props) {
         onClick={toggleDone}
         defaultChecked={done}
     />
-    <p>{props.title}</p>
-    <button>X</button>
+    <p className={done ? "done" : ""}>{props.title}</p>
+    <button onClick={() => props.deleteToDo(props.id)}>X</button>
     </div>
 )
 }
