@@ -18,7 +18,7 @@ class App extends Component {
   }
   componentDidMount() {
     axios
-    .get('https://jdm-todo-api.herokuapp.com/todos')
+    .get('https://jdm-express-todo.herokuapp.com//todos')
     .then(res => this.setState({
       todos: res.data
     }))  
@@ -33,7 +33,7 @@ class App extends Component {
     e.preventDefault()
     //post to api
     axios
-      .post('https://jdm-todo-api.herokuapp.com/todo', {
+      .post('https://jdm-express-todo.herokuapp.com/todo', {
         title: this.state.todo,
         done: false
       })
@@ -48,7 +48,7 @@ class App extends Component {
   }
   deleteToDo = id => {
     axios 
-    .delete(`https://jdm-todo-api.herokuapp.com/todo/${id}`)
+    .delete(`https://jdm-express-todo.herokuapp.com/todo/${id}`)
     .then(() => this.setState({
       todos: this.state.todos.filter(todo => {
         return todo.id !== id
