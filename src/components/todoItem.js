@@ -5,7 +5,7 @@ export default function TodoItem(props) {
     const [done, setDone] = useState(props.done)
     const toggleDone = () => {
         axios
-        .patch(`https://jdm-express-todo.herokuapp.com/${props.id}`,{
+        .patch(`https://jdm-express-todo.herokuapp.com/todo/${props.id}`,{
             done:!done
         })
         .then(() => setDone(!done))

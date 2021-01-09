@@ -18,7 +18,7 @@ class App extends Component {
   }
   componentDidMount() {
     axios
-    .get('https://jdm-express-todo.herokuapp.com//todos')
+    .get('https://jdm-express-todo.herokuapp.com/todos')
     .then(res => this.setState({
       todos: res.data
     }))  
